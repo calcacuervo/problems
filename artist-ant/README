@@ -1,0 +1,68 @@
+**************************
+******The Artist Ant******
+**************************
+--------------------------
+General
+--------------------------
+This project contains a solution to the artist ant problem. I was given the problem for an exercise as an interview.
+
+PROBLEM
+	The artist ant likes to paint patterns on a two dimensional infinite grid, starts looking towards North, and moves across the grid painting cells according to a set of rules. When she steps over a cell, depending on its current color, she turns left or right, then, paints the cell with the following in the palette, and finally moves forward one cell. The grid starts painted with the first color of the palette.
+	We want to build a program that emulates the behavior of our singular ant. For that, an input describing the palette, the rules and the amount of iterations to evaluate is provided. The program must output the state of the grid after the given amount of iterations (an iteration ends when the ant changes its current cell), and the ant’s position. 
+Input := <Palette> <Rules> <Iterations>
+	<Palette> := <Color>…
+		<Color> := R|G|B|W|Y
+	<Rules> := <Turn>…
+		<Turn> := L|R
+	<Iterations> := <positive integer>
+<Palette> specifies the list of colors in the palette, each color is represented by a character, R for red, G for green, B for blue, W for white and Y for yellow. <Rules> specifies the turn the ant does when she steps over a cell for each color in the palette in the same order, L for left, R for right. 
+For instance if the palette is RGY , and the rules are LRL, the ant turns left when it steps over a red cell,  right when stepping over a green cell and left when standing on a yellow cell. A red cell is painted green, a green cell is painted yellow, and a yellow cell is painted red.
+Output := <Painting> <Ant’s position>
+	<Painting> := <rows>
+		<rows> := <row>…
+			<row> := <cell>…<newline>
+				<newline> := CR LF
+			<cell> := <Color><pipe>
+			<pipe> := ‘|’
+	<Ant’s position> := <x-coordinate> <y-coordinate>
+		<x-coordinate> := <positive integer>
+		<y-coordinate> := <positive integer>
+
+Since the grid is infinite in both dimensions, the output must cover only a region. The region is defined as follows:
+Considering the initial position of the ant as the (0,0) position, n cells up, n cells down, m cells left and m cells right. N is the maximum absolute value of the y coordinates the ant reached. M is the maximum absolute value of the x coordinates the ant reached.
+
+--------------------------
+Contents
+--------------------------
+This project contains:
+* All runtime classes for the application to run. All classes are located in src/main/java/. Ant image is located in src/main/resources/.
+* Integration tests that shows:
+*** The two examples provided in the original requirement.
+*** A test that will open a User Interface and will show the progress of the ant through the grid.
+*** A test that will generate a BMP file with the grid representation in the system temp directory. The file will be named testFile<<RandomNumber>>.bmp. It shows an example for an ant with multiple colours and 100k movements.
+. The full path is logged in the test console.
+*** General tests to show what happens if the input is not good. 
+* There are not unit tests for classes, because it would take a lot a more time to finish them all, but it would definitely be necessary writing some of them to make sure all the mechanism are working fine. As it was not permitted to use external libraries, it is also a bit difficult to make proper unit tests without mocking classes (for example, using EasyMock).
+
+--------------------------
+Compiling
+--------------------------
+This project uses maven.
+To compile it, you can run
+mvn clean compile
+
+To run the tests,
+mvn clean test
+
+To Run tests separately:
+Example 1:
+mvn clean test -Dtest=Example1Test
+
+Example2:
+mvn clean test -Dtest=Example2Test
+
+Example with User Interface:
+mvn clean test -Dtest=UiTrackingTest
+
+Example with Image Generation:
+mvn clean test -Dtest=ImageGenerationTest
